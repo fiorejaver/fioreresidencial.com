@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="./styles.css">
-    
+
     <link rel="shortcut icon" href="https://www.javer.com.mx/casasencancun/assets/images/favicon.ico"
         type="image/x-icon">
     <title>Fioré - JAVER</title>
@@ -30,21 +30,94 @@
     <!-- <script>!function (e, t, a, n, g) { e[n] = e[n] || [], e[n].push({ "gtm.start": (new Date).getTime(), event: "gtm.js" }); var m = t.getElementsByTagName(a)[0], r = t.createElement(a); r.async = !0, r.src = "https://www.googletagmanager.com/gtm.js?id=GTM-P68DJB7", m.parentNode.insertBefore(r, m) }(window, document, "script", "dataLayer");</script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="validaciones.css">
     <style>
         :root {
             --blue: #313a41;
             --white: #fff;
             --cream: #fdfdfd !important;
         }
-        *{
-    font-family: 'Poppins', sans-serif !important;
-}
+
+        * {
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        .loader-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            border-top-color: #333;
+            animation: spin 0.8s ease-in-out infinite;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        select {
+            display: none;
+        }
+
+        [name="phone"] {
+            border-radius: .25rem !important;
+        }
+
+        .form-check {
+            display: flex;
+            /* align-content: center; */
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }
+
+        label.form-check-label {
+            margin: 0 !important;
+        }
+
+        [type="submit"] {
+            margin-top: 20px;
+        }
+
+        .responsive-list {
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .responsive-list li {
+            background: #f0f0f0;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .row.amenidades {
+            --bs-gutter-x: 0;
+        }
+
+        .icon {
+            fill: var(--white);
+        }
+
+        [id*=error] {
+            color: #ff3d3d;
+        }
 
         .playa .banner {
             margin-top: 0 !important;
             padding-bottom: 50px;
-            
+
         }
 
         .card-tipo .card-caption .cc-inner .tag {
@@ -402,125 +475,142 @@
 
             }
         }
-        .center-proto{
+
+        .center-proto {
             justify-content: center;
         }
 
         .card-tipo .card-thumb img {
-    width: 100%;
-    height: auto;
-    object-fit: unset
-}
+            width: 100%;
+            height: auto;
+            object-fit: unset
+        }
 
-.btn.btn-solid,.tipo-hogar .filtro-cont .btn-solid.btn{
-    color: var(--blue);
-}
-.crema{
-    color: var(--cream) !important;
-}
-.titulo-azul{
-    color: var(--blue) !important;
-}
+        .btn.btn-solid,
+        .tipo-hogar .filtro-cont .btn-solid.btn {
+            color: var(--blue);
+        }
+
+        .crema {
+            color: var(--cream) !important;
+        }
+
+        .titulo-azul {
+            color: var(--blue) !important;
+        }
 
 
-.btn-flotante-wpp {
-    position: fixed;
-    bottom: 80px; /* Ajusta la distancia respecto al borde inferior */
-    right: 20px;
-    z-index: 1000;
-}
+        .btn-flotante-wpp {
+            position: fixed;
+            bottom: 80px;
+            /* Ajusta la distancia respecto al borde inferior */
+            right: 20px;
+            z-index: 1000;
+        }
 
-.btn-flotante-wpp a {
-    display: flex;
-    align-items: center;
-    background-color: #25D366;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
+        .btn-flotante-wpp a {
+            display: flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-.btn-flotante-wpp img {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-}
+        .btn-flotante-wpp img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
 
-.popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    display: none;
-  }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            display: none;
+        }
 
-  .popup-content {
-    background: #fff;
-    padding: 0;
-    border-radius: 12px;
-    max-width: 90%;
-    width: 800px;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    overflow: hidden;
-  }
+        .popup-content {
+            background: #fff;
+            padding: 0;
+            border-radius: 12px;
+            max-width: 90%;
+            width: 800px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
 
-  .popup-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+        .popup-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-  .close-btn {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #fff;
-    background: #00000088;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    text-align: center;
-    line-height: 32px;
-  }
+        .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+            background: #00000088;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+            line-height: 32px;
+        }
 
-  @media (max-width: 480px) {
-    .popup-content {
-      width: 95%;
-    }
-  }
-
+        @media (max-width: 480px) {
+            .popup-content {
+                width: 95%;
+            }
+        }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-38D897N597"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date());
 
+        gtag('config', 'G-38D897N597', {
+            'linker': {
+                'domains': ['javer.com.mx', 'fioreresidencial.com/']
+            },
+            'allow_linker': true
+        });
+    </script>
 
 </head>
 
 <body>
 
-    
+
     <div id="popup" class="popup-overlay">
         <div class="popup-content">
-          <span class="close-btn" onclick="closePopup()">&times;</span>
-          <img src="assets/images/banner-fiore-promocion.jpg" alt="Promoción Massaro Residencial" class="popup-img">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <img src="assets/images/banner-fiore-promocion.jpg" alt="Promoción Massaro Residencial" class="popup-img">
         </div>
-      </div>
+    </div>
 
     <div class="main-header">
         <div class="contw">
             <div class="logo">
                 <picture>
-                    <img loading="lazy" src="img/logo-javer.png"
-                        alt="Casas Javer" width="159" height="40" class="img-fluid">
+                    <img loading="lazy" src="img/logo-javer.png" alt="Casas Javer" width="159" height="40"
+                        class="img-fluid">
                 </picture>
             </div>
             <div class="nav-cont">
@@ -540,7 +630,8 @@
     <div class="main-banner">
         <div class="frase">
             <div class="inner">
-                <h1 style="position:absolute;left:-9999px;">Fiore Residencial - Tu nuevo hogar en el Estado de México</h1>
+                <h1 style="position:absolute;left:-9999px;">Fiore Residencial - Tu nuevo hogar en el Estado de México
+                </h1>
                 <div aria-hidden="true" class="block">
 
                     <section class="home">
@@ -549,7 +640,7 @@
                                 <div class="home-text">
                                     <p class="animate-text">
                                         <span>Tu departamento ideal</span>
-                                        <p>Más amplitud, más tranquilidad, más lujo</p>
+                                    <p>Más amplitud, más tranquilidad, más lujo</p>
                                     </p>
                                 </div>
                             </div>
@@ -575,24 +666,28 @@
 
     <div style="padding-bottom: 50px;">
         <section class="home-section home-full-height bg-dark bg-gradient tipo-hogar .contw .title-s1" id="home"
-        data-background="assets/images/bg.svg"
-        style="height: 555px; background-color: #171323;">  
-        <div class="titan-caption contw">
-            <div class="caption-content">
-                <img width="250" src="assets/images/Logo-Fiore-blanco.png" alt="">
-                <!-- <h2 class=" title-s1 aos-init aos-animate crema" data-aos="fade-up">Arbore Residencial: </h2> -->
-                <p class="aos-init aos-animate" data-aos="fade-up" style="color: #fff;">En Fioré Residencial, descubre un estilo de vida único en un entorno diseñado para la tranquilidad y el confort. Departamentos inteligentes con amplios espacios y dos estacionamientos te esperan en un fraccionamiento con acceso controlado y amenidades como casa club con alberca, pet park, salón multiusos y área de pérgola con asador. Con torres estratégicamente ubicadas, Fioré combina un entorno amplio, funcional y cómodo para ofrecerte una experiencia residencial inigualable.</p>
-                <!-- <a class="section-scroll btn btn-border-w btn-round" href="#">cONOCE MÁS</a> -->
-                <a href="#contacto" class="btn btn-solid btn-sm btn-modal">Estoy interesado <svg width="10"
-                        height="15" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        style="margin-top: -4px;">
-                        <path
-                            d="M11.1786 20.215L18.3335 12.6263L20 14.3938L10 25L9.16677 24.1162L0 14.3938L1.66647 12.6263L8.82145 20.215L8.82145 0L11.1786 0L11.1786 20.215Z"
-                            fill="#323a40"></path>
-                    </svg></a>
+            data-background="assets/images/bg.svg" style="height: 555px; background-color: #171323;">
+            <div class="titan-caption contw">
+                <div class="caption-content">
+                    <img width="250" src="assets/images/Logo-Fiore-blanco.png" alt="">
+                    <!-- <h2 class=" title-s1 aos-init aos-animate crema" data-aos="fade-up">Arbore Residencial: </h2> -->
+                    <p class="aos-init aos-animate" data-aos="fade-up" style="color: #fff;">En Fioré Residencial,
+                        descubre un estilo de vida único en un entorno diseñado para la tranquilidad y el confort.
+                        Departamentos inteligentes con amplios espacios y dos estacionamientos te esperan en un
+                        fraccionamiento con acceso controlado y amenidades como casa club con alberca, pet park, salón
+                        multiusos y área de pérgola con asador. Con torres estratégicamente ubicadas, Fioré combina un
+                        entorno amplio, funcional y cómodo para ofrecerte una experiencia residencial inigualable.</p>
+                    <!-- <a class="section-scroll btn btn-border-w btn-round" href="#">cONOCE MÁS</a> -->
+                    <a href="#contacto" class="btn btn-solid btn-sm btn-modal">Estoy interesado <svg width="10"
+                            height="15" viewBox="0 0 20 25" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            style="margin-top: -4px;">
+                            <path
+                                d="M11.1786 20.215L18.3335 12.6263L20 14.3938L10 25L9.16677 24.1162L0 14.3938L1.66647 12.6263L8.82145 20.215L8.82145 0L11.1786 0L11.1786 20.215Z"
+                                fill="#323a40"></path>
+                        </svg></a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     </div>
 
 
@@ -605,7 +700,7 @@
                     <h2 class="title-s1 mt-2">Conoce Fioré</h2> <br>
                 </div>
                 <div class="row center-proto" style="position: relative; ">
-                    
+
 
                     <!-- Primer Nivel -->
                     <div class="col-12 col-sm-6 col-lg-5 mb-5 casas">
@@ -632,7 +727,7 @@
                             </div>
                         </div>
                     </div>
-                                <!--Segundo Nivel -->
+                    <!--Segundo Nivel -->
                     <div class="col-12 col-sm-6 col-lg-5 mb-5 casas">
                         <div class="card-tipo">
                             <div class="card-thumb">
@@ -657,7 +752,7 @@
                             </div>
                         </div>
                     </div>
-                                        <!-- Tercer Nivel -->
+                    <!-- Tercer Nivel -->
                     <div class="col-12 col-sm-6 col-lg-5 mb-5 casas">
                         <div class="card-tipo">
                             <div class="card-thumb">
@@ -682,7 +777,7 @@
                             </div>
                         </div>
                     </div>
-                                        <!-- Cuarto Nivel -->
+                    <!-- Cuarto Nivel -->
                     <div class="col-12 col-sm-6 col-lg-5 mb-5 casas">
                         <div class="card-tipo">
                             <div class="card-thumb">
@@ -715,44 +810,44 @@
     </div>
 
 
-        <div style="padding-top: 50px;">
-            <div class="contw">
-                <div class="row">
+    <div style="padding-top: 50px;">
+        <div class="contw">
+            <div class="row">
 
-                    <div class="col-12 my-4" data-aos="fade-up">
-                        <h2 class="titlo-azul">AMENIDADES</h2>
+                <div class="col-12 my-4" data-aos="fade-up">
+                    <h2 class="titlo-azul">AMENIDADES</h2>
 
-                    </div>
-                    <div class="col-12">
-                        <!-- <p class="mb-4" data-aos="fade-up"><strong>Cada ciudad en el estado cuenta con una escencia
+                </div>
+                <div class="col-12">
+                    <!-- <p class="mb-4" data-aos="fade-up"><strong>Cada ciudad en el estado cuenta con una escencia
                                 única.</strong></p> -->
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4 item mb-5" data-aos="fade-up">
-                                <picture>
-                                    <source srcset="./assets/images/amenidades/amenidad-alberca.png" type="image/webp"><img
-                                        loading="lazy" src="./assets/images/amenidades/amenidad-alberca.png" alt="Cancún"
-                                        width="522" height="426" class="img-fluid mx-auto d-block">
-                                </picture>
-                            </div>
-                            <div class="col-sm-6 col-md-4 item mb-5" data-aos="fade-up">
-                                <picture>
-                                    <source srcset="./assets/images/amenidades/amenidad-gym.png" type="image/webp"><img
-                                        loading="lazy" src="./assets/images/amenidades/amenidad-gym.png" alt="Playa del Cármen"
-                                        width="522" height="426" class="img-fluid mx-auto d-block">
-                                </picture>
-                            </div>
-                            <div class="col-sm-6 col-md-4 item mb-5" data-aos="fade-up">
-                                <picture>
-                                    <source srcset="./assets/images/amenidades/amenidad-jardin.png" type="image/webp"><img
-                                        loading="lazy" src="./assets/images/amenidades/amenidad-jardin.png" alt="Tulum"
-                                        width="522" height="426" class="img-fluid mx-auto d-block">
-                                </picture>
-                            </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4 item mb-5" data-aos="fade-up">
+                            <picture>
+                                <source srcset="./assets/images/amenidades/amenidad-alberca.png" type="image/webp"><img
+                                    loading="lazy" src="./assets/images/amenidades/amenidad-alberca.png" alt="Cancún"
+                                    width="522" height="426" class="img-fluid mx-auto d-block">
+                            </picture>
+                        </div>
+                        <div class="col-sm-6 col-md-4 item mb-5" data-aos="fade-up">
+                            <picture>
+                                <source srcset="./assets/images/amenidades/amenidad-gym.png" type="image/webp"><img
+                                    loading="lazy" src="./assets/images/amenidades/amenidad-gym.png"
+                                    alt="Playa del Cármen" width="522" height="426" class="img-fluid mx-auto d-block">
+                            </picture>
+                        </div>
+                        <div class="col-sm-6 col-md-4 item mb-5" data-aos="fade-up">
+                            <picture>
+                                <source srcset="./assets/images/amenidades/amenidad-jardin.png" type="image/webp"><img
+                                    loading="lazy" src="./assets/images/amenidades/amenidad-jardin.png" alt="Tulum"
+                                    width="522" height="426" class="img-fluid mx-auto d-block">
+                            </picture>
                         </div>
                     </div>
                 </div>
             </div>
-  
+        </div>
+
 
     </div>
     <div class="contacto" id="contacto">
@@ -770,92 +865,144 @@
                     <div class="formulario">
                         <h2>Déjanos tu mensaje</h2>
                         <p class="mb-4 text-white">Un asesor se pondrá en contacto a la brevedad.</p>
-    
-                            <form id="form-landing-quintana"
-                                action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-                                method="POST">
-        
-                                <!-- Campos ocultos de configuración -->
-                                <input type="hidden" name="oid" value="00Do0000000b6Io">
-                                <input type="hidden" name="captcha_settings"
-                                    value='{"keyname":"CAPTCHAJAVER","fallback":"true","orgId":"00Do0000000b6Io","ts":""}'>
-        
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group mb-4">
-                                            <label for="first_name">Nombre</label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name" required>
-                                        </div>
-                                    </div>
-        
-                                    <div class="col-6">
-                                        <div class="form-group mb-4">
-                                            <label for="middle_name">Apellido paterno</label>
-                                            <input type="text" class="form-control" id="middle_name" name="middle_name" required>
-                                        </div>
-                                    </div>
-        
-                                    <div class="col-6">
-                                        <div class="form-group mb-4">
-                                            <label for="last_name">Apellido materno</label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name" required>
-                                        </div>
-                                    </div>
-        
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group mb-4">
-                                            <label for="phoneInput" class="form-label">Teléfono</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">+52</span>
-                                                <input type="tel" class="form-control" id="phoneInput" maxlength="10" minlength="10"
-                                                    size="10" required oninput="document.getElementById('phone').value = this.value">
-                                                <input type="hidden" id="phone" name="phone">
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group mb-4">
-                                            <label for="email">Correo electrónico</label>
-                                            <input type="email" class="form-control" id="email" name="email" required>
-                                        </div>
-                                    </div>
-        
-                                    <!-- Aviso de privacidad -->
-                                    <div class="col-12 col-md-6 col-lg-7">
-                                        <div class="form-group mb-4">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="aviso" name="aviso">
-                                                <label class="form-check-label" for="aviso">Acepto Políticas de Privacidad</label>
-                                            </div>
-                                        </div>
-                                    </div>
-        
-                                    <div class="col-12 col-md-6 col-lg-5">
-                                        <div class="form-group mb-4">
-                                            <a class="text-white" href="https://www.javer.com.mx/avisos-de-privacidad"
-                                                target="_blank" rel="noopener noreferrer">Ver Aviso de Privacidad</a>
-                                        </div>
-                                    </div>
-        
-                                    <!-- reCAPTCHA -->
-                                    <div class="col-12 form-group mb-4">
-                                        <div class="g-recaptcha"
-                                            data-sitekey="6Lcg2vQZAAAAAHpqmf6Pj_-t-doxKr1iwLWfQuWQ"
-                                            data-callback="recaptcha_callback"></div>
-                                    </div>
-        
-                                    <div class="col-12">
-                                        <button class="btn btn-solid button" id="submitForm" type="submit">Enviar mensaje</button>
+                        <!--  ----------------------------------------------------------------------  -->
+                        <!--  NOTE: Please add the following <META> element to your page <HEAD>.      -->
+                        <!--  If necessary, please modify the charset parameter to specify the        -->
+                        <!--  character set of your HTML page.                                        -->
+                        <!--  ----------------------------------------------------------------------  -->
+
+                        <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+                        <script src="https://www.google.com/recaptcha/api.js"></script>
+                        <script>
+                            function timestamp() {var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value); elems["ts"] = JSON.stringify(new Date().getTime()); document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);} } setInterval(timestamp, 500); 
+                        </script>
+
+                        <!--  ----------------------------------------------------------------------  -->
+                        <!--  NOTE: Please add the following <FORM> element to your page.             -->
+                        <!--  ----------------------------------------------------------------------  -->
+
+                        <form class="contacto-outer contact-form "
+                            action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00Do0000000b6Io"
+                            method="POST">
+
+                            <input type=hidden name='captcha_settings'
+                                value='{"keyname":"CAPCHA_MASSARO","fallback":"true","orgId":"00Do0000000b6Io","ts":""}'>
+                            <input type=hidden name="oid" value="00Do0000000b6Io">
+                            <input type=hidden name="retURL"
+                                value="https://www.javer.com.mx/gracias?utm_source=google&utm_medium=leads&utm_campaign=massaro&utm_term=marketing">
+
+                            <!--  ----------------------------------------------------------------------  -->
+                            <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                            <!--  these lines if you wish to test in debug mode.                          -->
+                            <!--  <input type="hidden" name="debug" value=1>                              -->
+                            <!--  <input type="hidden" name="debugEmail" value="pcantu@javer.com.mx">     -->
+                            <!--  ----------------------------------------------------------------------  -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group mb-4">
+                                        <label for="first_name">Nombre*</label>
+                                        <input class="form-control" maxlength="40" name="first_name" size="20"
+                                            type="text"
+                                            title="El nombre sólo acepta letras, espacios en blanco y un mínimo de 4 caracteres"
+                                            pattern="[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]{4,80}" required />
                                     </div>
                                 </div>
-                            </form>
-        
-                        </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-4">
+                                        <label for="middle_name">Apellido paterno</label>
+                                        <input type="text" maxlength="40" class="form-control" id="middle_name"
+                                            name="middle_name">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group mb-4">
+                                        <label for="last_name">Apellido materno</label>
+                                        <input class="form-control" id="last_name" maxlength="80" name="last_name"
+                                            size="20" maxlength="40" type="text" />
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group mb-4">
+                                        <label for="phoneInput" class="form-label">Teléfono*</label>
+                                        <div class="input-group mb-3">
+                                            <!-- <span class="input-group-text">+52</span>
+                                            <input type="tel" class="form-control" id="phoneInput" maxlength="10"
+                                                minlength="10" size="10" required=""
+                                                oninput="document.getElementById('phone').value = this.value"> -->
+                                            <!--<input type="hidden" maxlength="40" name="phone" size="20" type="text"
+                                                title="Teléfono debe tener entre 8 y 10 dígitos" pattern="[0-9]{8,10}"
+                                                required /> -->
+                                            <input pattern="[0-9]{8,10}" class="form-control" maxlength="40"
+                                                name="phone" size="20" type="text"
+                                                title="El teléfono debe contener entre 8 y 10 dígitos" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group mb-4">
+                                        <!-- <label for="email">Correo electrónico</label>
+                                        <input type="email" class="form-control" id="email" name="email" required> -->
+                                        <label for="email">Email*</label>
+                                        <input class="form-control" maxlength="80" name="email" size="20" type="email"
+                                            title="El email no es válido"
+                                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required />
+                                    </div>
+                                </div>
+
+                                <!-- Aviso de privacidad -->
+                                <div class="col-12 col-md-6 col-lg-7">
+                                    <div class="form-group mb-4">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="aviso" name="aviso">
+                                            <label class="form-check-label" for="aviso">Acepto Políticas de
+                                                Privacidad</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-5">
+                                    <div class="form-group mb-4">
+                                        <a class="text-white" href="https://www.javer.com.mx/avisos-de-privacidad"
+                                            target="_blank" rel="noopener noreferrer">Ver Aviso de Privacidad</a>
+                                    </div>
+                                </div>
+
+                                <select id="00N3l00000Q7A54" name="00N3l00000Q7A54" title="FraccionamientoInterno">
+
+                                    <option selected value="FIORE RESIDENCIAL">FIORE RESIDENCIAL</option>
+
+                                </select>
+
+                                <select type="hidden" id="00N3l00000Q7A4n" name="00N3l00000Q7A4n"
+                                    title="Canal de Venta">
+                                    <option selected value="Medios Digitales">Medios Digitales</option>
+                                </select>
+
+                                <select type="hidden" id="00N3l00000Q7A5S" name="00N3l00000Q7A5S"
+                                    title="Subcanal de Venta">
+                                    <option selected value="Micrositios">Micrositios</option>
+                                </select>
+
+                                <select type="hidden" id="00N3l00000Q7A57" name="00N3l00000Q7A57" title="Fuente">
+
+                                    <option selected value="Landing_Querétaro">Landing_Querétaro</option>
+
+                                </select>
+
+                                <div class="g-recaptcha" data-sitekey="6LdzUFgrAAAAAJX8qcU8nKtljUDPajXFylRBTdxd"></div>
+
+                                <input id="enviar" disabled class="btn btn-solid button" type="submit" name="submit">
+                            </div>
+                        </form>
+
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
     <footer style="margin-top: 2rem;" class="main-footer">
@@ -877,8 +1024,7 @@
                 </div>
                 <div class="col-12 col-sm-6 text-start text-sm-end extras">
                     <div class="mb-4"><a href="https://www.javer.com.mx" target="_blank" rel="noopener noreferrer"><img
-                                src="img/logo-javer.png" alt="Casas Javer"
-                                width="119" height="30"></a></div><a
+                                src="img/logo-javer.png" alt="Casas Javer" width="119" height="30"></a></div><a
                         href="https://www.javer.com.mx/avisos-de-privacidad" target="_blank"
                         rel="noopener noreferrer">Aviso de privacidad</a>
                 </div>
@@ -923,29 +1069,122 @@
     </script>
 
     <!-- Script para timestamp del reCAPTCHA -->
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-    function timestamp() {
-        const response = document.getElementById("g-recaptcha-response");
-        if (!response || response.value.trim() === "") {
-            const elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
-            elems["ts"] = JSON.stringify(new Date().getTime());
-            document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function timestamp() {
+            const response = document.getElementById("g-recaptcha-response");
+            if (!response || response.value.trim() === "") {
+                const elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
+                elems["ts"] = JSON.stringify(new Date().getTime());
+                document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
+            }
         }
-    }
-    setInterval(timestamp, 500);
+        setInterval(timestamp, 500);
 
-    window.addEventListener('load', function () {
-    setTimeout(function () {
-      document.getElementById('popup').style.display = 'flex';
-    }, 1000);
-  });
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('popup').style.display = 'flex';
+            }, 1000);
+        });
 
-  function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-  }
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
 
-</script>
+    </script>
+    <script>
+        const d = document;
+        const $form = d.querySelector(".contact-form"),
+            $inputs = d.querySelectorAll(".contact-form [required]");
+
+        // Crear spans para mostrar errores bajo cada input requerido
+        $inputs.forEach(input => {
+            const $span = d.createElement("span");
+            $span.id = input.name;
+            $span.textContent = input.title;
+            $span.classList.add("contact-form-error", "none");
+            input.insertAdjacentElement("afterend", $span);
+        });
+
+        // Validación en tiempo real con patrón y mostrar/ocultar mensaje
+        d.addEventListener("keyup", (e) => {
+            if (e.target.matches(".contact-form [required]")) {
+                const $input = e.target;
+                const pattern = $input.pattern || $input.dataset.pattern;
+                const $errorSpan = d.getElementById($input.name);
+
+                if (pattern && $input.value !== "") {
+                    const regex = new RegExp(pattern);
+                    const isValid = regex.test($input.value);
+
+                    if (!isValid) {
+                        $errorSpan.classList.add("is-active");
+                    } else {
+                        $errorSpan.classList.remove("is-active");
+                    }
+                } else {
+                    $errorSpan.classList.remove("is-active");
+                }
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const telefonoInput = document.querySelector('input[name="phone"]');
+            const emailInput = document.querySelector('input[name="email"]');
+            const first_nameInput = document.querySelector('input[name="first_name"]');
+            const checkboxTerminos = document.getElementById('aviso');
+            const botonEnviar = document.getElementById('enviar');
+
+            // Función para validar campos y checkbox y controlar botón
+            function validarBoton() {
+                const telefonoVal = telefonoInput.value.trim();
+                const emailVal = emailInput.value.trim();
+                const firstNameVal = first_nameInput.value.trim();
+
+                if (telefonoVal !== "" && emailVal !== "" && firstNameVal !== "" && checkboxTerminos.checked) {
+                    botonEnviar.disabled = false;
+                } else {
+                    botonEnviar.disabled = true;
+                }
+            }
+
+            // Normalizar y limitar teléfono a 10 dígitos
+            telefonoInput.addEventListener('input', function () {
+                let valor = this.value.trim();
+                valor = valor.replace(/\D/g, '').substring(0, 10);
+                this.value = valor;
+                validarBoton();
+            });
+
+            // Solo letras y espacios en nombre, máximo 80 caracteres
+            first_nameInput.addEventListener('input', function () {
+                let valor = this.value;
+                let newValue = '';
+                for (let i = 0; i < valor.length; i++) {
+                    const char = valor.charAt(i);
+                    if (/^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s]$/.test(char)) {
+                        newValue += char;
+                    }
+                }
+                this.value = newValue.substring(0, 80);
+                validarBoton();
+            });
+
+            // Limitar email a 100 caracteres y quitar espacios inicio/fin
+            emailInput.addEventListener('input', function () {
+                let valor = this.value.trim();
+                if (valor.length > 100) valor = valor.substring(0, 100);
+                this.value = valor;
+                validarBoton();
+            });
+
+            // Checkbox
+            checkboxTerminos.addEventListener('change', validarBoton);
+
+            // Inicializar botón deshabilitado
+            botonEnviar.disabled = true;
+        });
+    </script>
 
 </body>
 
