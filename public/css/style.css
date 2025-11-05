@@ -171,6 +171,8 @@ font-family: 'Poppins', sans-serif;
     Normalize    0B2C3D
 ---------------------------------------------------- */
 :root {
+    --lnd-main-color: #171323;
+    --lnd-secondary-color: #c0863c;
     --ltn__primary-color: #000000;
     --ltn__primary-color-2: #041113;
     /* Darken */
@@ -679,6 +681,10 @@ ol li {
 
 .ltn__secondary-bg {
     background-color: var(--ltn__secondary-color);
+}
+
+.lnd-main-color-bg {
+    background-color: var(--lnd-main-color);
 }
 
 .ltn__secondary-bg-2 {
@@ -19096,9 +19102,13 @@ input.cart-plus-minus-box {
 }
 
 .theme-btn-1 {
-    background-color: var(--ltn__secondary-color);
+    background-color: var(--lnd-main-color);
     color: var(--white);
+    /* background-color: var(--lnd-secondary-color);
+    color: var(--lnd-main-color); */
+    /* border: var(--white) solid thin; */
 }
+
 
 .theme-btn-1:hover {
     background-color: var(--ltn__primary-color);
@@ -19106,12 +19116,12 @@ input.cart-plus-minus-box {
 }
 
 .theme-btn-2 {
-    background-color: var(--ltn__primary-color);
+    background-color: var(--lnd-secondary-color);
     color: var(--white);
 }
 
 .theme-btn-2:hover {
-    background-color: var(--ltn__secondary-color);
+    background-color: var(--lnd-secondary-color);
     color: var(--white);
 }
 
