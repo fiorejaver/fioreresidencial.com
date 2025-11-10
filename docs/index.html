@@ -3797,6 +3797,7 @@
                         }
 
                         // ✅ Analytics por formulario - FIORE
+                        console.log('🎯 Enviando evento a dataLayer:', formId);
                         window.dataLayer = window.dataLayer || [];
                         window.dataLayer.push({
                             event: 'fiore_form_submit',
@@ -3806,6 +3807,7 @@
                             landing: 'Landing_Estado_Mexico',
                             gclid: getGclidFromUrl()
                         });
+                        console.log('✅ Evento enviado a dataLayer');
 
                         form.reset();
                         grecaptcha.reset(recaptchaWidgetIds[formNum]);
