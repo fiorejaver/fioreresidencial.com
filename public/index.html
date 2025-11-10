@@ -11,20 +11,6 @@
     <title>Fioré - JAVER</title>
 
 
-
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    '../www.googletagmanager.com/gtm5445.html?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-KJ3SDN63');</script>
-    <!-- End Google Tag Manager -->
-
-
-
     <meta name="description"
         content="Enriquece tu futuro invirtiendo en una zona de alta plusvalía. Massaro residencial, fraccionamiento dentro de Zibatá con exclusivas casas con roof garden y amenidades de lujo, donde las familias disfrutarán de la más alta calidad de vida. Todo lo que necesitas en un solo lugar: estilo de vida, funcionalidad y comodidad.">
     <meta property="og:title" content="Fiore - JAVER">
@@ -525,13 +511,34 @@
         }
     </style>
 
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TZ9T64V');</script>
+    <!-- End Google Tag Manager -->
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-38D897N597"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag () { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-38D897N597', {
+            'linker': {
+                'domains': ['javer.com.mx', 'fioreresidencial.com']
+            }
+        });
+    </script>
 </head>
 
 <body>
-
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ3SDN63" height="0" width="0"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZ9T64V" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
@@ -930,7 +937,7 @@
         const textInTimer = 3000,
             textOutTimer = 3000;
 
-        function animateText() {
+        function animateText () {
             for (let i = 0; i < txtsLen; i++) {
                 txts[i].classList.remove("text-in", "text-out");
             }
@@ -959,7 +966,7 @@
     <!-- Script para timestamp del reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
-        function timestamp() {
+        function timestamp () {
             const response = document.getElementById("g-recaptcha-response");
             if (!response || response.value.trim() === "") {
                 const elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
@@ -975,7 +982,7 @@
             }, 1000);
         });
 
-        function closePopup() {
+        function closePopup () {
             document.getElementById('popup').style.display = 'none';
         }
 
