@@ -3790,19 +3790,14 @@
                             messageDiv.textContent = 'Formulario enviado correctamente.';
                         }
 
-                        // ✅ Analytics por formulario
-                        // if (window.gtag) {
-                        //     gtag('event', 'altai_form_submit', {   // evento único para Altai
-                        //         form_name: `altai_${formId}`,      // parámetro legible para diferenciar formularios
-                        //         form_origen: formId                 // si quieres mantener este para backend o más detalle
-                        //     });
-                        // }
-
+                        // ✅ Analytics por formulario - FIORE
                         window.dataLayer = window.dataLayer || [];
                         window.dataLayer.push({
-                            event: 'altai_form_submit',
-                            form_name: `altai_${formId}`,
+                            event: 'fiore_form_submit',
+                            form_name: `fiore_${formId}`,
                             form_origen: formId,
+                            proyecto: 'FIORE RESIDENCIAL',
+                            landing: 'Landing_Estado_Mexico',
                             gclid: getGclidFromUrl()
                         });
 
