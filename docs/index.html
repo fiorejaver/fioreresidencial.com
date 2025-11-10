@@ -832,15 +832,11 @@
                                         <input type="hidden" name="00N3l00000Q7A4k" value="Información">
 
                                         <div id="recaptcha-1"></div>
-                                        <!-- <div class="btn-wrapper mt-0">
+
+                                        <div class="btn-wrapper mt-4">
                                             <button class="btn theme-btn-1 btn-effect-1 text-uppercase w-100"
-                                                type="submit">solicitar información <i
+                                                type="submit">Solicitar Información <i
                                                     class="fa-solid fa-paper-plane"></i></button>
-                                        </div> -->
-                                        <div class="btn-wrapper animated  ltn__animation-pulse2">
-                                            <button type="button" class="btn popup-btn popup-btn-tour w-100"
-                                                data-bs-toggle="modal" data-bs-target="#tourModal">
-                                                SOLICITA INFROMACIÓN <i class="fa-solid fa-paper-plane"></i></button>
                                         </div>
                                         <p class="form-messege mb-0 mt-20"></p>
                                     </form>
@@ -2218,10 +2214,9 @@
                             <input type="hidden" name="00N3l00000Q7A4k" value="Información">
 
                             <div id="recaptcha-3"></div>
-                            <div class="btn-wrapper animated  ltn__animation-pulse2">
-                                <button type="button" class="btn popup-btn popup-btn-tour w-100" data-bs-toggle="modal"
-                                    data-bs-target="#tourModal">
-                                    SOLICITA INFROMACIÓN <i class="fa-solid fa-paper-plane"></i></button>
+                            <div class="btn-wrapper mt-4">
+                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase w-100"
+                                    type="submit">Solicitar Información <i class="fa-solid fa-paper-plane"></i></button>
                             </div>
                             <p class="form-messege mb-0 mt-20"></p>
                         </form>
@@ -3653,163 +3648,166 @@
                     container.setAttribute('data-widget-id', recaptchaWidgetIds[num]);
                 }
             });
+
+            // Registrar event listeners de los formularios DESPUÉS de que reCAPTCHA esté listo
+            registerFormListeners();
         }
-
-
 
         function getGclidFromUrl () {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('gclid') || '';
         }
 
-        formIds.forEach((formId) => {
-            const form = document.getElementById(formId);
-            if (!form) return;
+        function registerFormListeners () {
+            formIds.forEach((formId) => {
+                const form = document.getElementById(formId);
+                if (!form) return;
 
-            const formNum = formId.split('-')[2];
-            let messageDiv = document.getElementById(`form-message-${formNum}`);
-            if (!messageDiv) {
-                messageDiv = document.createElement('div');
-                messageDiv.id = `form-message-${formNum}`;
-                form.appendChild(messageDiv);
-            }
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                messageDiv.textContent = '';
-                messageDiv.classList.remove('alert', 'alert-danger', 'alert-success');
-
-                const recaptchaToken = grecaptcha.getResponse(recaptchaWidgetIds[formNum]);
-                if (!recaptchaToken) {
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Por favor, completa el reCAPTCHA.';
-                    return;
+                const formNum = formId.split('-')[2];
+                let messageDiv = document.getElementById(`form-message-${formNum}`);
+                if (!messageDiv) {
+                    messageDiv = document.createElement('div');
+                    messageDiv.id = `form-message-${formNum}`;
+                    form.appendChild(messageDiv);
                 }
 
-                const formData = new FormData(form);
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    messageDiv.textContent = '';
+                    messageDiv.classList.remove('alert', 'alert-danger', 'alert-success');
 
-                const first_name = formData.get('first_name')?.trim() || '';
-                const email = formData.get('email')?.trim() || '';
-                const phone = formData.get('phone')?.trim() || '';
-                const aviso = formData.has('aviso');
-
-                // Validaciones front extra
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                const phoneRegex = /^[0-9]{8,10}$/;
-                const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{4,}$/;
-
-                if (!nameRegex.test(first_name)) {
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Nombre inválido. Usa solo letras y al menos 4 caracteres.';
-                    return;
-                }
-
-                if (!first_name || !email || !phone) {
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Todos los campos son obligatorios.';
-                    return;
-                }
-
-                if (!emailRegex.test(email)) {
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Correo electrónico no válido.';
-                    return;
-                }
-
-                if (!phoneRegex.test(phone)) {
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Teléfono no válido (solo números de 7 a 15 dígitos).';
-                    return;
-                }
-
-                if (!aviso) {
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Debes aceptar el aviso de privacidad.';
-                    return;
-                }
-
-                const data = {
-                    first_name,
-                    email,
-                    phone,
-                    aviso,
-                    '00N3l00000Q7A54': formData.get('00N3l00000Q7A54'),
-                    '00N3l00000Q7A57': formData.get('00N3l00000Q7A57'),
-                    '00N3l00000Q7A4k': formData.get('00N3l00000Q7A4k'),
-                    '00N3l00000Q7A4n': formData.get('00N3l00000Q7A4n'),
-                    '00N3l00000Q7A5S': formData.get('00N3l00000Q7A5S'),
-                    'g-recaptcha-response': recaptchaToken,
-                    form_origen: formId // ✅ para backend y analytics
-                };
-
-                const isDescarga = formId === 'lead-form-2';
-                const endpoint = isDescarga
-                    ? 'https://back-altai.onrender.com/enviarYDescargar'
-                    : 'https://back-altai.onrender.com/enviar';
-
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data),
-                    });
-
-                    if (!response.ok) {
-                        const err = await response.json();
+                    const recaptchaToken = grecaptcha.getResponse(recaptchaWidgetIds[formNum]);
+                    if (!recaptchaToken) {
                         messageDiv.classList.add('alert', 'alert-danger');
-                        messageDiv.textContent = err.error || 'Error al enviar el formulario.';
+                        messageDiv.textContent = 'Por favor, completa el reCAPTCHA.';
                         return;
                     }
 
-                    if (isDescarga) {
-                        const pdfBlob = await response.blob();
-                        const url = window.URL.createObjectURL(pdfBlob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'brochure.pdf';
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        window.URL.revokeObjectURL(url);
+                    const formData = new FormData(form);
 
-                        messageDiv.classList.add('alert', 'alert-success');
-                        messageDiv.textContent = 'Formulario enviado correctamente. Descargando brochure...';
+                    const first_name = formData.get('first_name')?.trim() || '';
+                    const email = formData.get('email')?.trim() || '';
+                    const phone = formData.get('phone')?.trim() || '';
+                    const aviso = formData.has('aviso');
 
-                        setTimeout(() => {
-                            window.location.href = 'https://1drv.ms/b/c/76339f166f5118c6/EbTaVhtGIjVDkfo_4IkehyMB9eqnXquGaSTSZOIr-Gvogg?e=1uzJda';
-                        }, 3000);
-                    } else {
-                        messageDiv.classList.add('alert', 'alert-success');
-                        messageDiv.textContent = 'Formulario enviado correctamente.';
+                    // Validaciones front extra
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const phoneRegex = /^[0-9]{8,10}$/;
+                    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{4,}$/;
+
+                    if (!nameRegex.test(first_name)) {
+                        messageDiv.classList.add('alert', 'alert-danger');
+                        messageDiv.textContent = 'Nombre inválido. Usa solo letras y al menos 4 caracteres.';
+                        return;
                     }
 
-                    // ✅ Analytics por formulario
-                    // if (window.gtag) {
-                    //     gtag('event', 'altai_form_submit', {   // evento único para Altai
-                    //         form_name: `altai_${formId}`,      // parámetro legible para diferenciar formularios
-                    //         form_origen: formId                 // si quieres mantener este para backend o más detalle
-                    //     });
-                    // }
+                    if (!first_name || !email || !phone) {
+                        messageDiv.classList.add('alert', 'alert-danger');
+                        messageDiv.textContent = 'Todos los campos son obligatorios.';
+                        return;
+                    }
 
-                    window.dataLayer = window.dataLayer || [];
-                    window.dataLayer.push({
-                        event: 'altai_form_submit',
-                        form_name: `altai_${formId}`,
-                        form_origen: formId,
-                        gclid: getGclidFromUrl()
-                    });
+                    if (!emailRegex.test(email)) {
+                        messageDiv.classList.add('alert', 'alert-danger');
+                        messageDiv.textContent = 'Correo electrónico no válido.';
+                        return;
+                    }
+
+                    if (!phoneRegex.test(phone)) {
+                        messageDiv.classList.add('alert', 'alert-danger');
+                        messageDiv.textContent = 'Teléfono no válido (solo números de 7 a 15 dígitos).';
+                        return;
+                    }
+
+                    if (!aviso) {
+                        messageDiv.classList.add('alert', 'alert-danger');
+                        messageDiv.textContent = 'Debes aceptar el aviso de privacidad.';
+                        return;
+                    }
+
+                    const data = {
+                        first_name,
+                        email,
+                        phone,
+                        aviso,
+                        '00N3l00000Q7A54': formData.get('00N3l00000Q7A54'),
+                        '00N3l00000Q7A57': formData.get('00N3l00000Q7A57'),
+                        '00N3l00000Q7A4k': formData.get('00N3l00000Q7A4k'),
+                        '00N3l00000Q7A4n': formData.get('00N3l00000Q7A4n'),
+                        '00N3l00000Q7A5S': formData.get('00N3l00000Q7A5S'),
+                        'g-recaptcha-response': recaptchaToken,
+                        form_origen: formId // ✅ para backend y analytics
+                    };
+
+                    const isDescarga = formId === 'lead-form-2';
+                    const endpoint = isDescarga
+                        ? 'https://fiore-backend-production.up.railway.app/enviarYDescargar'
+                        : 'https://fiore-backend-production.up.railway.app/enviar';
+
+                    try {
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data),
+                        });
+
+                        if (!response.ok) {
+                            const err = await response.json();
+                            messageDiv.classList.add('alert', 'alert-danger');
+                            messageDiv.textContent = err.error || 'Error al enviar el formulario.';
+                            return;
+                        }
+
+                        if (isDescarga) {
+                            const pdfBlob = await response.blob();
+                            const url = window.URL.createObjectURL(pdfBlob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'brochure.pdf';
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+                            window.URL.revokeObjectURL(url);
+
+                            messageDiv.classList.add('alert', 'alert-success');
+                            messageDiv.textContent = 'Formulario enviado correctamente. Descargando brochure...';
+
+                            setTimeout(() => {
+                                window.location.href = 'https://1drv.ms/b/c/76339f166f5118c6/EbTaVhtGIjVDkfo_4IkehyMB9eqnXquGaSTSZOIr-Gvogg?e=1uzJda';
+                            }, 3000);
+                        } else {
+                            messageDiv.classList.add('alert', 'alert-success');
+                            messageDiv.textContent = 'Formulario enviado correctamente.';
+                        }
+
+                        // ✅ Analytics por formulario
+                        // if (window.gtag) {
+                        //     gtag('event', 'altai_form_submit', {   // evento único para Altai
+                        //         form_name: `altai_${formId}`,      // parámetro legible para diferenciar formularios
+                        //         form_origen: formId                 // si quieres mantener este para backend o más detalle
+                        //     });
+                        // }
+
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                            event: 'altai_form_submit',
+                            form_name: `altai_${formId}`,
+                            form_origen: formId,
+                            gclid: getGclidFromUrl()
+                        });
 
 
-                    form.reset();
-                    grecaptcha.reset(recaptchaWidgetIds[formNum]);
+                        form.reset();
+                        grecaptcha.reset(recaptchaWidgetIds[formNum]);
 
-                } catch (error) {
-                    console.error('Error:', error);
-                    messageDiv.classList.add('alert', 'alert-danger');
-                    messageDiv.textContent = 'Error de red o del servidor.';
-                }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        messageDiv.classList.add('alert', 'alert-danger');
+                        messageDiv.textContent = 'Error de red o del servidor.';
+                    }
+                });
             });
-        });
+        }
     </script>
 
     <!-- Script para funciones de los botones popup -->
