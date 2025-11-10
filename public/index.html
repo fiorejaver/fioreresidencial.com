@@ -463,6 +463,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-TZ9T64V');</script>
     <!-- End Google Tag Manager -->
 
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-38D897N597"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -470,8 +471,13 @@
         gtag('js', new Date());
 
         gtag('config', 'G-38D897N597', {
+            debug_mode: true,
             'linker': {
-                'domains': ['javer.com.mx', 'fioreresidencial.com']
+                'domains': [
+                    'javer.com.mx',
+                    'fioreresidencial.com',
+                    'fiorejaver.github.io'
+                ]
             }
         });
     </script>
